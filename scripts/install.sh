@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -euo pipefail
+
 cd $HELM_PLUGIN_DIR
 version="$(cat plugin.yaml | grep "version" | cut -d '"' -f 2)"
 echo "Installing helm-gcs ${version} ..."
