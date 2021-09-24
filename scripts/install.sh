@@ -2,6 +2,17 @@
 
 set -euo pipefail
 
+cleanup() {
+  rv=$?
+  if [ $rv -ne 0 ]; then
+    echo "install failed"
+    rm -rf $HELM_PLUGIN_DIR
+  fi
+  exit $rv
+}
+
+trap "cleanup" EXIT
+
 cd $HELM_PLUGIN_DIR
 version="$(cat plugin.yaml | grep "version" | cut -d '"' -f 2)"
 echo "Installing helm-gcs ${version} ..."
@@ -42,7 +53,10 @@ else
 fi
 
 # Install bin
-rm -rf bin && mkdir bin && tar xvf $filename -C bin > /dev/null && rm -f $filename
+rm -rf bin && mkdir bin && tar xvf $filename -C bin > /dev/null 
+
+# Remove archive
+rm -f $filename
 
 echo "helm-gcs ${version} is correctly installed."
 echo
