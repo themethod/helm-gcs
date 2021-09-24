@@ -4,10 +4,15 @@ set -euo pipefail
 
 cleanup() {
   rv=$?
+
+  # Remove archive
+  rm -f $filename
+
   if [ $rv -ne 0 ]; then
     echo "install failed"
     rm -rf $HELM_PLUGIN_DIR
   fi
+
   exit $rv
 }
 
@@ -54,9 +59,6 @@ fi
 
 # Install bin
 rm -rf bin && mkdir bin && tar xvf $filename -C bin > /dev/null 
-
-# Remove archive
-rm -f $filename
 
 echo "helm-gcs ${version} is correctly installed."
 echo
