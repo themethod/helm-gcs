@@ -27,7 +27,7 @@ $ helm plugin update gcs
 Install a specific version:
 
 ```shell
-$ helm plugin install https://github.com/hayorov/helm-gcs.git --version 0.3.17
+$ helm plugin install https://github.com/hayorov/helm-gcs.git --version 0.3.20
 ```
 
 ## Quick start
@@ -61,6 +61,8 @@ To authenticate against GCS you can:
 - Use the [application default credentials](https://cloud.google.com/sdk/gcloud/reference/auth/application-default/)
 
 - Use a service account via [`export GOOGLE_APPLICATION_CREDENTIALS=credentials.json` system variable](https://cloud.google.com/docs/authentication/getting-started)
+
+- Use a temporary [OAuth 2.0 access token](https://developers.google.com/identity/protocols/oauth2) via `export GOOGLE_OAUTH_ACCESS_TOKEN=<MY_ACCESS_TOKEN>` environment variable. When used, plugin will ignore other authentification methods.
 
 See [GCP documentation](https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application) for more information.
 
